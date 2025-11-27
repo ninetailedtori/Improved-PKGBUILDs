@@ -1,0 +1,28 @@
+#%Module1.0
+#
+# Created by Darjan Krijan [https://disc-kuraudo.eu]
+#
+
+set MODULE      "aocl-aocc"
+set BASE_DIR    "/opt"
+set VERSION     "5.1.0"
+set MODULE_ROOT "${BASE_DIR}/aocl/aocc"
+set MODULE_TEXT "AMD Optimizing CPU Libraries (AOCL)"
+
+conflict aocl-gcc
+
+setenv       AOCL_ROOT       ${MODULE_ROOT}
+prepend-path CPATH           ${MODULE_ROOT}/include
+prepend-path LIBRARY_PATH    ${MODULE_ROOT}/lib
+prepend-path LD_LIBRARY_PATH ${MODULE_ROOT}/lib
+
+module-whatis "${MODULE_TEXT} version ${VERSION}"
+
+proc ModulesHelp {} {
+	global MODULE_TEXT
+	puts stderr "This module sets up the environment for ${MODULE_TEXT}"
+	puts stderr "by adapting the following environment variables:"
+	puts stderr "CPATH"
+	puts stderr "LIBRARY_PATH"
+	puts stderr "LD_LIBRARY_PATH"
+}
