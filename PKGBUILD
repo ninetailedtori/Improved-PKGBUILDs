@@ -1,0 +1,47 @@
+# Maintainer: Toria <ninetailedtori@uwu.gal>
+# Maintainer: Darjan Krijan [https://disc-kuraudo.eu]
+
+pkgname=aocc
+_major=5-0
+pkgver=5.0.0
+pkgrel=2
+pkgdesc="AMD Optimizing C/C++ Compiler"
+arch=('x86_64')
+license=('custom')
+_url="https://www.amd.com/en/developer/aocc/eula/aocc-${_major}-eula.html?filename=aocc-compiler-${pkgver}.tar"
+url="https://www.amd.com/en/developer/aocc.html"
+source=("${_url}" "local://modulefile")
+options=('staticlibs' '!strip' 'libtool')
+optdepends=('env-modules')
+install=aocc.install
+_sha256sum=$(curl -A 'Mozilla/5.0' "${url}" | grep --perl-regexp '(?<=sha256sum: )(\w+)(?=\<\/td\>)' --only-matching | sed -n '1 p')
+sha256sums=("$_sha256sum" "1740216760f755dc031d54f06c29333bca73f728d89a706f405b41e737bfc56f")
+
+# default flags for compiler
+# edit this to your liking for default flags for your architecutre
+# like e.g. "-O3 -march=znver2 -mtune=znver2"
+_default_flags=""
+
+# path hardcoded in aocc.install. if you change this, change paths there as well
+_aocc_prefix=/opt/aocc
+
+package() {
+	prefix=${pkgdir}${_aocc_prefix}
+	mkdir -p ${prefix}
+
+	cp -rp ${srcdir}/${pkgname}-compiler-${pkgver}/* ${prefix}
+
+	ln -s ${_aocc_prefix}/bin/clang   ${prefix}/bin/aocc-clang
+	ln -s ${_aocc_prefix}/bin/clang++ ${prefix}/bin/aocc-clang++
+	ln -s ${_aocc_prefix}/bin/flang   ${prefix}/bin/aocc-flang
+
+	# Default flags the compilers should use
+	# This only works together with calling the "aocc-" prefixed symlinks above
+	# Verbose output should read "Configuration file: /opt/aocc/bin/aocc.cfg"
+	echo "${_default_flags}" > ${prefix}/bin/aocc.cfg
+
+	# env-modules (optional)
+	cp ${srcdir}/modulefile ${prefix}
+	mkdir -p ${pkgdir}/etc/modules/modulefiles
+	ln -s ${_aocc_prefix}/modulefile ${pkgdir}/etc/modules/modulefiles/${pkgname}
+}
