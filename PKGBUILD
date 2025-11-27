@@ -12,6 +12,7 @@ pkgrel=1
 pkgdesc="AMD Optimizing CPU Libraries"
 arch=('x86_64')
 license=('custom')
+DLAGENTS=("http::/usr/bin/curl -A 'Mozilla' -fLC - --retry 3 --retry-delay 3 -o %o %u")
 _url_aocc="https://www.amd.com/en/developer/aocl/libm/eula/libm-${_major}-eula.html?filename=aocl-libm-linux-aocc-${pkgver}.tar.gz"
 _url_gcc="https://www.amd.com/en/developer/aocl/libm/eula/libm-${_major}-eula.html?filename=aocl-libm-linux-gcc-${pkgver}.tar.gz"
 url="https://www.amd.com/en/developer/aocl.html"
@@ -25,8 +26,8 @@ source=(
 options=('staticlibs' '!strip')
 makedepends=('patchelf')
 optdepends=('env-modules')
-_sha256sum1=$(curl -A 'Mozilla/5.0' "${url}" | grep --perl-regexp '(?<=SHA\-256 checksum: )(\w+)(?=\<\/td\>)' --only-matching | sed -n '1 p')
-_sha256sum2=$(curl -A 'Mozilla/5.0' "${url}" | grep --perl-regexp '(?<=SHA\-256 checksum: )(\w+)(?=\<\/td\>)' --only-matching | sed -n '2 p')
+_sha256sum1=$(curl -A 'Mozilla' "${url}" | grep --perl-regexp '(?<=SHA\-256 checksum: )(\w+)(?=\<\/td\>)' --only-matching | sed -n '1 p')
+_sha256sum2=$(curl -A 'Mozilla' "${url}" | grep --perl-regexp '(?<=SHA\-256 checksum: )(\w+)(?=\<\/td\>)' --only-matching | sed -n '2 p')
 sha256sums=("$_sha256sum1"
             "$_sha256sum2"
             '4f58524e1948b2cb470b856546b87656b2fbce0b98b0d43d345fcedb101f1295'
