@@ -10,7 +10,8 @@ arch=('x86_64')
 license=('custom')
 _url="https://www.amd.com/en/developer/aocc/eula/aocc-${_major}-eula.html?filename=aocc-compiler-${pkgver}.tar"
 url="https://www.amd.com/en/developer/aocc.html"
-source=("${_url}" "local://modulefile")
+source=("${_url}"
+        "modulefile")
 options=('staticlibs' '!strip' 'libtool')
 optdepends=('env-modules')
 install=aocc.install
