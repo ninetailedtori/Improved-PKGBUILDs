@@ -16,7 +16,7 @@ source=("$_url"
 options=('staticlibs' '!strip' 'libtool')
 optdepends=('env-modules')
 install=aocc.install
-_sha256sum=$(curl -A 'Mozilla' "$url" | grep --perl-regexp '(?<=sha256sum: )(\w+)(?=\<\/td\>)' --only-matching | sed -n '1 p')
+_sha256sum=$(curl -A 'Mozilla' "$url" | grep --perl-regexp '\w{64}(?=\<\/td\>)' --only-matching | sed -n '1 p')
 sha256sums=("$_sha256sum" "1740216760f755dc031d54f06c29333bca73f728d89a706f405b41e737bfc56f")
 
 # default flags for compiler
