@@ -1,0 +1,27 @@
+pkgbase = aocl
+	pkgdesc = AMD Optimizing CPU Libraries
+	pkgver = 5.1.0
+	pkgrel = 1
+	url = https://www.amd.com/en/developer/aocl.html
+	arch = x86_64
+	license = custom
+	makedepends = patchelf
+	optdepends = env-modules
+	options = staticlibs
+	options = !strip
+	source = https://www.amd.com/en/developer/aocl/libm/eula/libm-5-1-eula.html?filename=aocl-libm-linux-aocc-5.1.0.tar.gz
+	source = https://www.amd.com/en/developer/aocl/libm/eula/libm-5-1-eula.html?filename=aocl-libm-linux-gcc-5.1.0.tar.gz
+	source = aocl-aocc.install
+	source = aocl-gcc.install
+	source = modulefile
+	sha256sums = 73ad28baaa1096972804c1a1d42b8ed4724c0b98b60806e94ef6322bc86afa8b
+	sha256sums = b27be8e8f564ee3417438748bc281b5398155c361dc9633af83c0e9fc94b8784
+	sha256sums = 4f58524e1948b2cb470b856546b87656b2fbce0b98b0d43d345fcedb101f1295
+	sha256sums = fe5245a7b34253a67105ee5e6bb868bbb69ebf318af32dc81e1cdd7d7277b639
+	sha256sums = bbf75a4d30aa4f8c4eb46d3c6193c011c43683352266fa56314f16212e409965
+
+pkgname = aocl-aocc
+	install = aocl-aocc.install
+
+pkgname = aocl-gcc
+	install = aocl-gcc.install
