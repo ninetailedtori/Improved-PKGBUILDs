@@ -8,8 +8,8 @@ pkgrel=2
 pkgdesc="AMD Optimizing C/C++ Compiler"
 arch=('x86_64')
 license=('custom')
-DLAGENTS=("http::/usr/bin/curl -A 'Mozilla' -fLC - --retry 3 --retry-delay 3 -o %o %u")
-_url="https://www.amd.com/en/developer/aocc/eula/aocc-${_major}-eula.html?filename=aocc-compiler-${pkgver}.tar"
+DLAGENTS=("https::/usr/bin/curl -A 'Mozilla' -fLC - --retry 3 --retry-delay 3 -o %o %u")
+_url="https://download.amd.com/developer/eula/aocc/aocc-${_major}/aocc-compiler-${pkgver}.tar"
 url="https://www.amd.com/en/developer/aocc.html"
 source=("${_url}"
         "modulefile")
