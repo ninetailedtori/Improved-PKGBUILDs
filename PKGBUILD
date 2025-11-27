@@ -8,6 +8,7 @@ pkgrel=2
 pkgdesc="AMD Optimizing C/C++ Compiler"
 arch=('x86_64')
 license=('custom')
+DLAGENTS=("http::/usr/bin/curl -A 'Mozilla' -fLC - --retry 3 --retry-delay 3 -o %o %u")
 _url="https://www.amd.com/en/developer/aocc/eula/aocc-${_major}-eula.html?filename=aocc-compiler-${pkgver}.tar"
 url="https://www.amd.com/en/developer/aocc.html"
 source=("${_url}"
@@ -15,7 +16,7 @@ source=("${_url}"
 options=('staticlibs' '!strip' 'libtool')
 optdepends=('env-modules')
 install=aocc.install
-_sha256sum=$(curl -A 'Mozilla/5.0' "${url}" | grep --perl-regexp '(?<=sha256sum: )(\w+)(?=\<\/td\>)' --only-matching | sed -n '1 p')
+_sha256sum=$(curl -A 'Mozilla' "${url}" | grep --perl-regexp '(?<=sha256sum: )(\w+)(?=\<\/td\>)' --only-matching | sed -n '1 p')
 sha256sums=("$_sha256sum" "1740216760f755dc031d54f06c29333bca73f728d89a706f405b41e737bfc56f")
 
 # default flags for compiler
