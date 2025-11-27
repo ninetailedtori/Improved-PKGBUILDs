@@ -9,8 +9,8 @@ pkgbase = aocl
 	optdepends = env-modules
 	options = staticlibs
 	options = !strip
-	source = https://www.amd.com/en/developer/aocl/libm/eula/libm-5-1-eula.html?filename=aocl-libm-linux-aocc-5.1.0.tar.gz
-	source = https://www.amd.com/en/developer/aocl/libm/eula/libm-5-1-eula.html?filename=aocl-libm-linux-gcc-5.1.0.tar.gz
+	source = https://download.amd.com/developer/eula/aocl/aocl-5-1/aocl-linux-aocc-5.1.0.tar.gz
+	source = https://download.amd.com/developer/eula/aocl/aocl-5-1/aocl-linux-gcc-5.1.0.tar.gz
 	source = aocl-aocc.install
 	source = aocl-gcc.install
 	source = modulefile
