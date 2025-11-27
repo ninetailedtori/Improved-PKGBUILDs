@@ -12,7 +12,7 @@ pkgrel=1
 pkgdesc="AMD Optimizing CPU Libraries"
 arch=('x86_64')
 license=('custom')
-DLAGENTS=("http::/usr/bin/curl -A 'Mozilla' -fLC - --retry 3 --retry-delay 3 -o %o %u")
+DLAGENTS=("https::/usr/bin/curl -A 'Mozilla' -fLC - --retry 3 --retry-delay 3 -o %o %u")
 _url_aocc="https://www.amd.com/en/developer/aocl/libm/eula/libm-${_major}-eula.html?filename=aocl-libm-linux-aocc-${pkgver}.tar.gz"
 _url_gcc="https://www.amd.com/en/developer/aocl/libm/eula/libm-${_major}-eula.html?filename=aocl-libm-linux-gcc-${pkgver}.tar.gz"
 url="https://www.amd.com/en/developer/aocl.html"

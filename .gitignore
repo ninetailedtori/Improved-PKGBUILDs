@@ -1,6 +1,8 @@
 *.xz
 *.gz
 *.bz2
+*.tar
+*.lz4
 
 /*/pkg/
 /*/src/
