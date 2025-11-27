@@ -26,8 +26,8 @@ source=(
 options=('staticlibs' '!strip')
 makedepends=('patchelf')
 optdepends=('env-modules')
-_sha256sum1=$(curl -A 'Mozilla' "${url}" | grep --perl-regexp '(?<=SHA\-256 checksum: )(\w+)(?=\<\/td\>)' --only-matching | sed -n '1 p')
-_sha256sum2=$(curl -A 'Mozilla' "${url}" | grep --perl-regexp '(?<=SHA\-256 checksum: )(\w+)(?=\<\/td\>)' --only-matching | sed -n '2 p')
+_sha256sum1=$(curl -A 'Mozilla' "$url" | grep --perl-regexp '\w{64}(?=\<\/td\>)' --only-matching | sed -n '1 p')
+_sha256sum2=$(curl -A 'Mozilla' "$url" | grep --perl-regexp '\w{64}(?=\<\/td\>)' --only-matching | sed -n '4 p')
 sha256sums=("$_sha256sum1"
             "$_sha256sum2"
             '4f58524e1948b2cb470b856546b87656b2fbce0b98b0d43d345fcedb101f1295'
