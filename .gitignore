@@ -16,3 +16,4 @@
 /virtualbox-ext-oracle/*.vbox-extpack
 
 /tmp
+.idea
