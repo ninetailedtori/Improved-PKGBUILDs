@@ -1,0 +1,23 @@
+# Maintainer: Toria <ninetailedtori@uwu.gal>
+# Maintainer: Ratakor <ratakor@disroot.org>
+
+pkgname=clang-bin-cc-cxx
+pkgver=2
+pkgrel=1
+pkgdesc="Relink /bin/cc to clang, and /bin/cxx to clang++."
+arch=('any')
+license=('GPL')
+depends=('clang')
+provides=('cc' 'cxx')
+conflicts=('clangbincc')
+install="${pkgname}.install"
+source=("${pkgname}.hook")
+sha256sums=('6276d14a91ff84064dc0891e11a67447dd783504af30643cdc15de86aab0cc38')
+sha384sums=('29acf18436349e05bfeee09bb6b74c221343e4235f27ae82fd3206cdedf7baa70afcce228b830ad86bca199424a761b0')
+sha512sums=('f0a6f83d995f8526e9918a291f82e5b933a261193ba73b1644c04b0c8a6c3855bee28fae8e7c1f274ffcca4e4e804abcffcac73d4f66120bda57bf7f9dd9504f')
+b2sums=('0446d53ff3c3a90e8db6ac4297d148676e5459e549de7bfe870ec8c307a7528c38cd904e8e084acf1ce662bbd84f9d5062fa6c83aee7f1624dfc08e13983d318')
+
+package() {
+	cd "$srcdir"
+	install -Dm 644 "${pkgname}.hook" "${pkgdir}/usr/share/libalpm/hooks/${pkgname}.hook"
+}
