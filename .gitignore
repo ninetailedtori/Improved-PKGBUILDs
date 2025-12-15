@@ -4,8 +4,8 @@
 *.tar
 *.lz4
 
-/*/pkg/
-/*/src/
+Vial/
+pkg2appimage.AppImage
 
 /linux-ck/config.last
 /linux-ck/*.pkg
