@@ -7,8 +7,8 @@ pkgbase = wttr-bin
 	license = MIT
 	makedepends = git
 	depends = curl
-	provides = wttr=1.55
-	conflicts = wttr
+	provides = wttr-bin=1.55
+	conflicts = wttr-bin
 	source = https://github.com/cblte/bash-script-wttr/archive/refs/tags/v1.55.tar.gz
 	sha256sums = 307cb2b7955c46fd9e7d52b60f233f12dfd2c3c0140dae8bea7747fe4ae1df51
 	sha384sums = e5dd2fc11800e48354ca571448d4381b7f85fc6b1e3b25cae0f6c17f40329057d697d78d3e28e455a855a07d42e4aaa6
