@@ -1,12 +1,3 @@
-/*.xz
-/*.gz
-/*.bz2
-/*.tar*
-/*.lz4
-
-/pkg/
-/src/
-
-/tmp
-.idea
-.vscode
+discord-canary-*.tar*
+LICENSE.html
+OSS-LICENSES.html
