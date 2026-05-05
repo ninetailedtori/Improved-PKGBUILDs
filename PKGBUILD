@@ -1,4 +1,5 @@
 # Maintained by Kodehawa <david.alejandro.rubio at gmail.com>
+# Contributor: Toria <ninetailedtori@uwu.gal>
 # Contributor: FivePB <admin@fivepb.me>
 # Contributor: Auxim <hello@auxim.dev>
 
@@ -27,19 +28,33 @@ conflicts=('discord-canary')
 url='https://canary.discordapp.com'
 license=('custom')
 options=(!strip)
-depends=('electron35' 'gtk3' 'libnotify' 'libxss' 'glibc' 'alsa-lib' 'nspr' 'nss' 'xdg-utils' 'libcups' 'unzip')
+depends=(
+    'electron35'
+    'gtk3'
+    'libnotify'
+    'libxss'
+    'glibc'
+    'alsa-lib'
+    'nspr'
+    'nss'
+    'xdg-utils'
+    'libcups'
+    'unzip'
+)
 makedepends=('asar' 'curl' 'sed')
-optdepends=('libpulse: Pulseaudio support'
-            'xdg-utils: Open files'
-            'noto-fonts-emoji: Google font for emoji support.'
-            'ttf-symbola: Font for emoji support.'
-            'noto-fonts-cjk: Font for special characters such as /shrug face.')
-source=("https://dl-canary.discordapp.net/apps/linux/${pkgver}/${_pkgname}-${pkgver}.tar.gz"
-        'LICENSE.html::https://discordapp.com/terms'
-        'OSS-LICENSES.html::https://discordapp.com/licenses'
-        'installed.json'
-        )
-# Skip SHA256 of licenses, it fails always for some reason.
+optdepends=(
+    'libpulse: Pulseaudio support'
+    'xdg-utils: Open files'
+    'noto-fonts-emoji: Google font for emoji support.'
+    'ttf-symbola: Font for emoji support.'
+    'noto-fonts-cjk: Font for special characters such as /shrug face.'
+)
+source=(
+    "https://dl-canary.discordapp.net/apps/linux/${pkgver}/${_pkgname}-${pkgver}.tar.gz"
+    'LICENSE.html::https://discordapp.com/terms'
+    'OSS-LICENSES.html::https://discordapp.com/licenses'
+    'installed.json'
+)
 sha256sums=(
   'SKIP'
   'SKIP'
@@ -50,7 +65,7 @@ sha256sums=(
 # The tar extracts to a folder called DiscordCanary.
 _tarname=DiscordCanary
 
-#installed.json needs to be copied to this folder or the updater breaks
+# installed.json needs to be copied to this folder or the updater breaks
 _discordmodules='${DISCORD_USER_DATA_DIR:-${XDG_CONFIG_HOME:-$HOME/.config}}'/discordcanary/$pkgver/modules/
 
 prepare() {
@@ -58,7 +73,7 @@ prepare() {
   tar xf ${_pkgname}-${pkgver}.tar.gz
   cd $_tarname
 
-  sed -i "s|Exec=.*|Exec=/usr/bin/$_pkgname|" $_pkgname.desktop
+  sed -i "s|Exec=.*|Exec=/usr/bin/$_pkgname|"                                                                     $_pkgname.desktop
   echo 'Path=/usr/bin' >> $_pkgname.desktop
 }
 
@@ -66,16 +81,19 @@ package() {
   # Install the app
   install -d "$pkgdir"/usr/lib/$_pkgname
 
+  # The following requires Discord to run once, in install(), then to fetch
+  # .config/discordcanary/app-${pkgver}/resources/app.asar and patch it.
+
   # HACKS FOR SYSTEM ELECTRON
   # Thanks to the discord_arch_electron guy for this ;)
   # Thanks to https://aur.archlinux.org/packages/discord_arch_electron/#comment-776307 for the less-hacky fix.
-  asar e $_tarname/resources/app.asar $_tarname/resources/app
-  sed -i "s|process.resourcesPath|'/usr/lib/$_pkgname'|" $_tarname/resources/app/app_bootstrap/buildInfo.js
-  sed -i "s|exeDir,|'/usr/share/pixmaps',|" $_tarname/resources/app/app_bootstrap/autoStart/linux.js
+  asar e $_tarname/resources/app.asar                                                                             $_tarname/resources/app
+  sed -i "s|process.resourcesPath|'/usr/lib/$_pkgname'|"                                                          $_tarname/resources/app/app_bootstrap/buildInfo.js
+  sed -i "s|exeDir,|'/usr/share/pixmaps',|"                                                                       $_tarname/resources/app/app_bootstrap/autoStart/linux.js
   # Hack for Electron 29+
-  sed -i -E "s|resourcesPath = _path.+;|resourcesPath = '/usr/share/${_pkgname}/resources';|" $_tarname/resources/app/common/paths.js
-  sed -i "s|module.paths = \[\]|module.paths = \[process.env.HOME + '/.config/discordcanary/$pkgver/modules'\]|" $_tarname/resources/app/app_bootstrap/requireNative.js
-  asar p $_tarname/resources/app $_tarname/resources/app.asar --unpack-dir '**'
+  sed -i -E "s|resourcesPath = _path.+;|resourcesPath = '/usr/share/${_pkgname}/resources';|"                     $_tarname/resources/app/common/paths.js
+  sed -i "s|module.paths = \[\]|module.paths = \[process.env.HOME + '/.config/discordcanary/$pkgver/modules'\]|"  $_tarname/resources/app/app_bootstrap/requireNative.js
+  asar p $_tarname/resources/app                                                                                  $_tarname/resources/app.asar --unpack-dir '**'
   rm -rf $_tarname/resources/app
 
   # Copy relevant data
@@ -89,13 +107,13 @@ package() {
   echo "if ! [ -f $_discordmodules/installed.json ]; then mkdir -p $_discordmodules && cp /usr/lib/$_pkgname/installed.json $_discordmodules; fi" >> "$srcdir/$_pkgname"
   echo "exec electron35 /usr/lib/$_pkgname/app.asar \$@" >> "$srcdir"/$_pkgname
 
-  install -d "$pkgdir"/usr/{bin,share/{pixmaps,applications}}
-  install -Dm 755 $_pkgname "$pkgdir"/usr/bin/$_pkgname
+  install -d      "$pkgdir"/usr/{bin,share/{pixmaps,applications}}
+  install -Dm 755 $_pkgname                                                                                       "$pkgdir"/usr/bin/$_pkgname
 
-  cp $_tarname/discord.png "$pkgdir"/usr/share/pixmaps/$_pkgname.png
-  cp $_tarname/$_pkgname.desktop "$pkgdir"/usr/share/applications/$_pkgname.desktop
+  cp $_tarname/discord.png                                                                                        "$pkgdir"/usr/share/pixmaps/$_pkgname.png
+  cp $_tarname/$_pkgname.desktop                                                                                  "$pkgdir"/usr/share/applications/$_pkgname.desktop
 
   # Licenses
-  install -Dm 644 LICENSE.html "$pkgdir"/usr/share/licenses/$pkgname/LICENSE.html
-  install -Dm 644 OSS-LICENSES.html "$pkgdir"/usr/share/licenses/$pkgname/OSS-LICENSES.html
+  install -Dm 644 LICENSE.html                                                                                    "$pkgdir"/usr/share/licenses/$pkgname/LICENSE.html
+  install -Dm 644 OSS-LICENSES.html                                                                               "$pkgdir"/usr/share/licenses/$pkgname/OSS-LICENSES.html
 }
