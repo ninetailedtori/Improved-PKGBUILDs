@@ -1,4 +1,5 @@
+pkg/
+src/
 discord-canary-*.tar*
 LICENSE.html
 OSS-LICENSES.html
-src

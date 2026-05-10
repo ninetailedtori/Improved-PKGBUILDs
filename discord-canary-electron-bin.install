@@ -1,0 +1,37 @@
+# discord-canary-electron-bin.install
+
+post_install() {
+    # Detect the actual user (handle both direct sudo and makepkg scenarios)
+    if [ -n "$SUDO_USER" ]; then
+        user_home=$(getent passwd "$SUDO_USER" | cut -d: -f6)
+    elif [ -n "$PKGUSER" ]; then  # makepkg sets this sometimes
+        user_home=$(getent passwd "$PKGUSER" | cut -d: -f6)
+    else
+        return 0  # Running as non-root in testing, skip
+    fi
+
+    # Inject SKIP_HOST_UPDATE into Discord's settings.json
+    # This prevents Discord from trying to self-update
+    discord_settings="$user_home/.config/discordcanary/settings.json"
+    if [ -f "$discord_settings" ]; then
+        jq '.SKIP_HOST_UPDATE = true' "$discord_settings" > "$discord_settings.tmp"
+        mv "$discord_settings.tmp" "$discord_settings"
+        chown "${SUDO_USER}:${SUDO_USER}" "$discord_settings"
+    fi
+
+    # From Discord's postinst.sh cleanup
+    rm -rf "$user_home/.config/discordcanary/Cache" 2>/dev/null
+    rm -rf "$user_home/.config/discordcanary/GPUCache" 2>/dev/null
+    rm -f /tmp/discordcanary.sock 2>/dev/null
+}
+
+post_upgrade() {
+    post_install "$1"
+}
+
+post_remove() {
+    # Cleanup is optional—Discord config is user-specific
+    rm -rf "$user_home/.config/discordcanary/Cache" 2>/dev/null
+    rm -rf "$user_home/.config/discordcanary/GPUCache" 2>/dev/null
+    rm -f /tmp/discordcanary.sock 2>/dev/null
+}
