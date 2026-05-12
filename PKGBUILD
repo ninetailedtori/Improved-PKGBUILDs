@@ -71,7 +71,7 @@ source=(
     'LICENSE.html::https://discordapp.com/terms'
     'OSS-LICENSES.html::https://discordapp.com/licenses'
 )
-sha256sums=('a7ea26f058f3d5aac89cb432e0300c06b0f533a98513c724c929eb17d348e96d'
+sha256sums=('ae837ca90f46f485651e2cd2ebea9219ed15af0e3e551dcc13e9c7d0add11943'
             '16936e2f9f2df4f063db742188492f620ef9a541cd06c3c261333dcb20812fbd'
             '24a62492494c1a129940af395d3af054b9faf51706be115ab03db6c911fa5ea9')
 
@@ -139,8 +139,8 @@ grep -q "resourcesPath=process.resourcesPath" "app/bundle.js" || error 'Replacem
         "${pkgdir}/usr/share/applications" \
         "${pkgdir}/usr/bin"
 
-    # install app
-    install -Dm 644 "app.asar"                          "${pkgdir}${_libdir}/app.asar"
+    # install app to homedir - I hate Discord packaging!
+    install -Dm 644 "app.asar"                          "${pkgdir}/${HOME}/${_appdir}/resources/app.asar"
 
     # desktop entry and icon
     install -Dm 644 "${_unpackdir}/discord.png"         "${pkgdir}/usr/share/pixmaps/${_pkgname}.png"
