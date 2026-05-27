@@ -19,7 +19,7 @@ pkgname=(
   'pipewire-zeroconf-git'
   'pipewire-vulkan-git'
 )
-pkgver=1.5.0.r13799.9a6f8d31d
+pkgver=1.7.0.r15475.7303a55b5
 pkgrel=1
 pkgdesc='Low-latency audio/video router and processor. (GIT version)'
 arch=('x86_64')
