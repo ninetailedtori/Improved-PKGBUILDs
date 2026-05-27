@@ -1071,8 +1071,6 @@ package_pipewire-vulkan-git() {
 
   mv vulkan/* "${pkgdir}"
 
-  chrpath -d "${pkgdir}/usr/lib/pipewire-${_api_ver}/libpipewire-module-vulkan.so"
-
   install -Dm644 -t "${pkgdir}/usr/share/licenses/${pkgname}" pipewire/COPYING
 }
 
