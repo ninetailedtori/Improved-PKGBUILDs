@@ -390,7 +390,6 @@ package_pipewire-git() {
   _pick vulkan usr/bin/pipewire-vulkan
   _pick vulkan "usr/lib/spa-${_spa_ver}/vulkan"
   _pick vulkan usr/share/pipewire/pipewire-vulkan.conf
-  _pick vulkan usr/bin/pipewire-vulkan
 
   _pick roc "usr/lib/pipewire-${_api_ver}/libpipewire-module-roc-sink.so"
   _pick roc "usr/lib/pipewire-${_api_ver}/libpipewire-module-roc-source.so"
@@ -654,7 +653,6 @@ package_pipewire-selinux-git() {
   _pick vulkan usr/bin/pipewire-vulkan
   _pick vulkan "usr/lib/spa-${_spa_ver}/vulkan"
   _pick vulkan usr/share/pipewire/pipewire-vulkan.conf
-  _pick vulkan usr/bin/pipewire-vulkan
 
   _pick roc "usr/lib/pipewire-${_api_ver}/libpipewire-module-roc-sink.so"
   _pick roc "usr/lib/pipewire-${_api_ver}/libpipewire-module-roc-source.so"
