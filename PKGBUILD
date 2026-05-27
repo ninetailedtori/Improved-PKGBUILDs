@@ -105,7 +105,7 @@ build() {
     -D jack-devel=true \
     -D libjack-path=/usr/lib \
     -D rlimits-install=true \
-    -D installed_tests=true \
+    -D installed_tests=enabled \
     -D systemd-system-service=enabled \
     -D session-managers=[] \
     -D bluez5-codec-lc3plus=disabled \
@@ -115,8 +115,6 @@ build() {
     -D snap=disabled \
     -D man=enabled \
     -D docs=enabled
-
-  meson compile -C build
 
   # SELinux variant build
   arch-meson pipewire build-selinux \
@@ -129,7 +127,7 @@ build() {
     -D jack-devel=true \
     -D libjack-path=/usr/lib \
     -D rlimits-install=true \
-    -D installed_tests=true \
+    -D installed_tests=enabled \
     -D systemd-system-service=enabled \
     -D session-managers=[] \
     -D bluez5-codec-lc3plus=disabled \
@@ -140,6 +138,7 @@ build() {
     -D man=enabled \
     -D docs=enabled
 
+  meson compile -C build
   meson compile -C build-selinux
 }
 
