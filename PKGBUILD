@@ -169,7 +169,6 @@ package_pipewire-git() {
     'glib2' 'libglib-2.0.so'
     'ncurses' 'libncursesw.so'
     'readline' 'libreadline.so'
-    'vulkan-icd-loader' 'libvulkan.so'
     'libdrm'
     'ffmpeg' 'libavcodec.so' 'libavutil.so' 'libswscale.so'
   )
@@ -203,7 +202,7 @@ package_pipewire-git() {
 
   DESTDIR="${pkgdir}" meson install -C build
 
-  rm -fr "${srcdir}"/{libs,audio,alsa,docs,jack,jack-client,pulse,roc,v4l2,x11-bell,zeroconf}
+  rm -fr "${srcdir}"/{libs,audio,alsa,docs,ffado,libcamera,jack,jack-client,pulse,roc,v4l2,vulkan,x11-bell,zeroconf}
 
   (
   cd "${pkgdir}"
@@ -387,6 +386,11 @@ package_pipewire-git() {
   _pick v4l2 "usr/lib/pipewire-${_api_ver}/v4l2"
   _pick v4l2 "usr/lib/spa-${_spa_ver}/v4l2"
   _pick v4l2 usr/share/man/man1/pw-v4l2.1
+
+  _pick vulkan usr/bin/pipewire-vulkan
+  _pick vulkan "usr/lib/spa-${_spa_ver}/vulkan"
+  _pick vulkan usr/share/pipewire/pipewire-vulkan.conf
+  _pick vulkan usr/bin/pipewire-vulkan
 
   _pick roc "usr/lib/pipewire-${_api_ver}/libpipewire-module-roc-sink.so"
   _pick roc "usr/lib/pipewire-${_api_ver}/libpipewire-module-roc-source.so"
@@ -429,7 +433,6 @@ package_pipewire-selinux-git() {
     'glib2' 'libglib-2.0.so'
     'ncurses' 'libncursesw.so'
     'readline' 'libreadline.so'
-    'vulkan-icd-loader' 'libvulkan.so'
     'libdrm'
     'ffmpeg' 'libavcodec.so' 'libavutil.so' 'libswscale.so'
   )
@@ -463,7 +466,7 @@ package_pipewire-selinux-git() {
 
   DESTDIR="${pkgdir}" meson install -C build-selinux
 
-  rm -fr "${srcdir}"/{libs,audio,alsa,docs,jack,jack-client,pulse,roc,v4l2,x11-bell,zeroconf}
+  rm -fr "${srcdir}"/{libs,audio,alsa,docs,ffado,libcamera,jack,jack-client,pulse,roc,v4l2,vulkan,x11-bell,zeroconf}
 
   (
   cd "${pkgdir}"
@@ -647,6 +650,11 @@ package_pipewire-selinux-git() {
   _pick v4l2 "usr/lib/pipewire-${_api_ver}/v4l2"
   _pick v4l2 "usr/lib/spa-${_spa_ver}/v4l2"
   _pick v4l2 usr/share/man/man1/pw-v4l2.1
+
+  _pick vulkan usr/bin/pipewire-vulkan
+  _pick vulkan "usr/lib/spa-${_spa_ver}/vulkan"
+  _pick vulkan usr/share/pipewire/pipewire-vulkan.conf
+  _pick vulkan usr/bin/pipewire-vulkan
 
   _pick roc "usr/lib/pipewire-${_api_ver}/libpipewire-module-roc-sink.so"
   _pick roc "usr/lib/pipewire-${_api_ver}/libpipewire-module-roc-source.so"
