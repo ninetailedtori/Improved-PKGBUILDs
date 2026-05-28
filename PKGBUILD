@@ -673,6 +673,22 @@ package_pipewire-v4l2-git() {
   install -Dt "${pkgdir}/usr/share/licenses/${pkgname}" -m644 pipewire/COPYING
 }
 
+package_pipewire-vulkan-git() {
+  pkgdesc+=" - Vulkan interceptor"
+  depends=(
+    "libpipewire=${pkgver}" "libpipewire-${_api_ver}.so"
+    "pipewire=${pkgver}"
+    glibc
+    pipewire-session-manager
+    sh
+    vulkan-icd-loader
+  )
+
+  mv vulkan/* "${pkgdir}"
+
+  install -Dt "${pkgdir}/usr/share/licenses/${pkgname}" -m644 pipewire/COPYING
+}
+
 package_pipewire-x11-bell-git() {
   pkgdesc+=" - X11 bell"
   depends=(
