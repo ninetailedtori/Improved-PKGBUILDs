@@ -323,6 +323,7 @@ package_pipewire-git() {
 }
 
 package_pipewire-selinux-git() {
+  pkgdesc='Low-latency audio/video router and processor. (GIT version, SELinux-aware)'
   license+=(
     # libspa-alsa
     LGPL-2.1-or-later

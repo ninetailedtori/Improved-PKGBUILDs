@@ -107,6 +107,7 @@ pkgname = pipewire-git
 	backup = usr/share/pipewire/minimal.conf
 
 pkgname = pipewire-selinux-git
+	pkgdesc = Low-latency audio/video router and processor. (GIT version, SELinux-aware)
 	install = pipewire-git.install
 	license = MIT
 	license = LGPL-2.1-or-later
