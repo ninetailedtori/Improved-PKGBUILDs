@@ -1,4 +1,5 @@
-#Maintainer: Gustavo Alvarez <sl1pkn07@gmail.com>
+# Maintainer: Toria <ninetailedtori@uwu.gal>
+# Maintainer: Gustavo Alvarez <sl1pkn07@gmail.com>
 
 pkgbase=pipewire-git
 pkgname=(
@@ -162,7 +163,7 @@ package_pipewire-git() {
   _spa_ver="$(cat ${srcdir}/pipewire/meson.build | grep -m1 spaversion | grep -o "[[:digit:]]*" | paste -sd'.')"
 
   depends=(
-    "libpipewire-git=${pkgver}" "libpipewire-${_api_ver}.so"
+    "libpipewire=${pkgver}" "libpipewire-${_api_ver}.so"
     'gcc-libs' #libgcc_s.so libstdc++.so
     'glibc' # libc.so
     'dbus' 'libdbus-1.so'
@@ -425,7 +426,7 @@ package_pipewire-selinux-git() {
   _spa_ver="$(cat ${srcdir}/pipewire/meson.build | grep -m1 spaversion | grep -o "[[:digit:]]*" | paste -sd'.')"
 
   depends=(
-    "libpipewire-git=${pkgver}" "libpipewire-${_api_ver}.so"
+    "libpipewire=${pkgver}" "libpipewire-${_api_ver}.so"
     'gcc-libs' #libgcc_s.so libstdc++.so
     'glibc' # libc.so
     'dbus' 'libdbus-1.so'
@@ -733,7 +734,7 @@ package_pipewire-libcamera-git() {
     'gcc-libs' # libgcc_s.so libstdc++.so
     'glibc' # libc.so
     'libcamera' 'libcamera-base.so' 'libcamera.so'
-    'pipewire-git'
+    'pipewire'
   )
 
   mv libcamera/* "${pkgdir}"
@@ -748,7 +749,7 @@ package_pipewire-audio-git() {
 
   pkgdesc+=" - Audio support"
   depends=(
-    "pipewire-git=${pkgver}"
+    "pipewire=${pkgver}"
     "libpipewire=${pkgver}" "libpipewire-${_api_ver}.so"
     'gcc-libs' # libgcc_s.so libstdc++.so
     'glibc' # libc.so
@@ -802,9 +803,9 @@ package_pipewire-alsa-git() {
 
   pkgdesc+=" - ALSA configuration"
   depends=(
-    "pipewire-git=${pkgver}"
+    "pipewire=${pkgver}"
     "libpipewire=${pkgver}" "libpipewire-${_api_ver}.so"
-    "pipewire-audio-git=${pkgver}"
+    "pipewire-audio=${pkgver}"
     'pipewire-session-manager'
     'gcc-libs' # ibgcc_s.so
     'glibc' # libc.so  libm.so
@@ -836,8 +837,8 @@ package_pipewire-ffado-git() {
   pkgdesc+=" - FireWire support"
   depends=(
     "libpipewire=${pkgver}" "libpipewire-${_api_ver}.so"
-    "pipewire-git=${pkgver}"
-    "pipewire-audio-git=${pkgver}"
+    "pipewire=${pkgver}"
+    "pipewire-audio=${pkgver}"
     'glibc' # libc.so
     'libffado' 'libffado.so'
   )
@@ -855,9 +856,9 @@ package_pipewire-jack-client-git() {
 
   pkgdesc+=" - PipeWire as JACK client"
   depends=(
-    "pipewire-git=${pkgver}"
+    "pipewire=${pkgver}"
     "libpipewire=${pkgver}" "libpipewire-${_api_ver}.so"
-    "pipewire-audio-git=${pkgver}"
+    "pipewire-audio=${pkgver}"
     'glibc' # libc.so
     'dbus' 'libdbus-1.so'
     'jack2' 'libjack.so'
@@ -880,9 +881,9 @@ package_pipewire-jack-git() {
   pkgdesc+=" - JACK replacement"
   license+=('GPL2')  # libjackserver
   depends=(
-    "pipewire-git=${pkgver}"
+    "pipewire=${pkgver}"
     "libpipewire=${pkgver}" "libpipewire-${_api_ver}.so"
-    "pipewire-audio-git=${pkgver}"
+    "pipewire-audio=${pkgver}"
     'pipewire-session-manager'
     'glibc' # ld-linux-x86-64.so libc.so libm.so
     'sh'
@@ -922,9 +923,9 @@ package_pipewire-pulse-git() {
 
   pkgdesc+=" - PulseAudio replacement"
   depends=(
-    "pipewire-git=${pkgver}"
+    "pipewire=${pkgver}"
     "libpipewire=${pkgver}" "libpipewire-${_api_ver}.so"
-    "pipewire-audio-git=${pkgver}"
+    "pipewire-audio=${pkgver}"
     'pipewire-session-manager'
     'gcc-libs' # libgcc_s.so
     'glibc' # libc.so libm.so
@@ -970,9 +971,9 @@ package_pipewire-roc-git() {
 
   pkgdesc+=" - ROC support"
   depends=(
-    "pipewire-git=${pkgver}"
+    "pipewire=${pkgver}"
     "libpipewire=${pkgver}" "libpipewire-${_api_ver}.so"
-    "pipewire-audio-git=${pkgver}"
+    "pipewire-audio=${pkgver}"
     'gcc-libs' # libgcc_s.so
     'glibc' # libc.so
     'roc-toolkit' 'libroc.so'
@@ -994,7 +995,7 @@ package_pipewire-v4l2-git() {
 
   pkgdesc+=" - V4L2 interceptor"
   depends=(
-    "pipewire-git=${pkgver}"
+    "pipewire=${pkgver}"
     "libpipewire=${pkgver}" "libpipewire-${_api_ver}.so"
     'pipewire-session-manager'
     'glibc' # libc.so
@@ -1015,9 +1016,9 @@ package_pipewire-x11-bell-git() {
 
   pkgdesc+=" - X11 bell"
   depends=(
-    "pipewire-git=${pkgver}"
+    "pipewire=${pkgver}"
     "libpipewire=${pkgver}" "libpipewire-${_api_ver}.so"
-    "pipewire-audio-git=${pkgver}"
+    "pipewire-audio=${pkgver}"
     'glibc' # ibc.so
     'libcanberra' 'libcanberra.so'
     'libx11' # libX11.so
@@ -1039,7 +1040,7 @@ package_pipewire-v4l2-git() {
 
   pkgdesc+=" - V4L2 interceptor"
   depends=(
-    "pipewire-git=${pkgver}"
+    "pipewire=${pkgver}"
     "libpipewire=${pkgver}" "libpipewire-${_api_ver}.so"
     'pipewire-session-manager'
     'glibc' # libc.so
@@ -1060,9 +1061,9 @@ package_pipewire-vulkan-git() {
 
   pkgdesc+=" - X11 bell"
   depends=(
-    "pipewire-git=${pkgver}"
+    "pipewire=${pkgver}"
     "libpipewire=${pkgver}" "libpipewire-${_api_ver}.so"
-    "pipewire-audio-git=${pkgver}"
+    "pipewire-audio=${pkgver}"
     "vulkan-icd-loader"
   )
   optdepends+=("vulkan-validation-layers")
@@ -1080,9 +1081,9 @@ package_pipewire-zeroconf-git() {
 
   pkgdesc+=" - Zeroconf support"
   depends=(
-    "pipewire-git=${pkgver}"
+    "pipewire=${pkgver}"
     "libpipewire=${pkgver}" "libpipewire-${_api_ver}.so"
-    "pipewire-audio-git=${pkgver}"
+    "pipewire-audio=${pkgver}"
     'gcc-libs' # libgcc_s.so
     'glibc' # libc.so libm.so
     'openssl' 'libcrypto.so'
