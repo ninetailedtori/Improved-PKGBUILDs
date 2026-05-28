@@ -3,6 +3,8 @@
 # Maintainer: Toria <ninetailedtori@uwu.gal>
 # Maintainer: Gustavo Alvarez <sl1pkn07@gmail.com>
 
+# Inspired by: https://archlinux.org/packages/extra/x86_64/pipewire/
+
 pkgbase='pipewire-git'
 pkgname=(
   'pipewire-git'
