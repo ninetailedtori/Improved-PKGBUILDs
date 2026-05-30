@@ -134,8 +134,11 @@ build() {
     -D docs='enabled'
   )
 
-  meson compile -C build "${meson_options[@]}" -D selinux='disabled'
-  meson compile -C build-selinux "${meson_options[@]}" -D selinux='enabled'
+  arch-meson pipewire build "${meson_options[@]}" -D selinux='disabled'
+  arch-meson pipewire build-selinux "${meson_options[@]}" -D selinux='enabled'
+
+  meson compile -C build
+  meson compile -C build-selinux
 }
 
 check() {
